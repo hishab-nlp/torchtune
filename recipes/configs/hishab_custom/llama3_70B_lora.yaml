@@ -98,7 +98,7 @@ resume_from_checkpoint: False
 dataset:
   _component_: torchtune.datasets.chat_dataset
   train_on_input: True
-  source: hishab/universal-agent-conv-torchtune-updated
+  source: hishab/my_custom_dataset
   conversation_style: openai
   max_seq_len: 4096
   split: train

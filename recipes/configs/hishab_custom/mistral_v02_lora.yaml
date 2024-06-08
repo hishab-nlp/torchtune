@@ -27,7 +27,7 @@ tokenizer:
 # Dataset
 dataset:
   _component_: torchtune.datasets.chat_dataset
-  source : hishab/banglalink-agent-conv
+  source : hishab/my_custom_dataset
   conversation_style: openai
   max_seq_len: 4096
   split: train

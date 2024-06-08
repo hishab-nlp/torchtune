@@ -23,7 +23,7 @@ tokenizer:
 # Dataset
 dataset:
   _component_: torchtune.datasets.chat_dataset
-  source : hishab/banglalink-agent-conv
+  source : hishab/my_custom_dataset
   conversation_style: openai
   max_seq_len: 1536
   split: train
@@ -41,7 +41,7 @@ model:
 
 checkpointer:
   _component_: torchtune.utils.FullModelHFCheckpointer
-  checkpoint_dir: /path//gemma_model
+  checkpoint_dir: /path/gemma_model
   checkpoint_files: [
     model-00001-of-00004.safetensors,
     model-00002-of-00004.safetensors,
