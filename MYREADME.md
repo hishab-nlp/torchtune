@@ -42,3 +42,45 @@ tune run lora_finetune_single_device --config "path/to/config.yaml"
 tune run lora_finetune_distributed --config "path/to/config.yaml"
 
 ```
+
+## Checkpoint conversion
+
+To convert torchtune checkpoint into huggingface checkpoint, run the following script:
+
+- LORA checkpoint conversation
+
+```py
+import os
+import torch
+from torchtune.models.convert_weights import tune_to_peft_adapter_weights
+
+
+pt_weight_path = "checkpoint_path/adapter.pt"
+peft_weight_dir = "lora-peft-output"
+os.makedirs(peft_weight_dir, exist_ok=True)
+
+lora_weights = torch.load(pt_weight_path)
+lora_converted_weights_peft = tune_to_peft_adapter_weights(lora_weights)
+torch.save(lora_converted_weights_peft, os.path.join(peft_weight_dir,"adapter_model.bin"))
+# you need to copy the adapater_config.json inside this peft_weight_dir to use this adapter.
+```
+
+- Prepare a config `adapter_config.json` with following information according to the training yaml
+
+```json
+{
+    "r": 32,
+    "lora_alpha": 32,
+    "target_modules": [
+        "q_proj",
+        "k_proj",
+        "v_proj"
+    ],
+    "peft_type": "LORA"
+}
+```
+
+NB: If the checkpoint already in Huggingface style then we don't need to do this.
+
+## Inference with trained model
+
