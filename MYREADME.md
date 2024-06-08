@@ -2,7 +2,9 @@
 
 ## Installation
 ```
-git install git+https://github.com/pytorch/torchtune.git
+git clone https://github.com/hishab-nlp/torchtune.git
+cd torchtune
+pip install -e .
 ```
 
 ## Dataset
